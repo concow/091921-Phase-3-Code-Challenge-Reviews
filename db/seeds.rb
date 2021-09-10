@@ -21,6 +21,56 @@ puts "Creating reviews..."
 # * TODO: create reviews! Remember, a review belongs to a product *
 # * and a review belongs to an user.                              *
 # *****************************************************************
+
 # Create Reviews Here
 
+rev1 = Review.create(star_rating: 4, comment: "Great Product", product_id: product1.id, user_id: user1.id)
+rev2 = Review.create(star_rating: 1, comment: "Horrible Product", product_id: product1.id, user_id: user2.id)
+rev3 = Review.create(star_rating: 2, comment: "Decent", product_id: product1.id, user_id: user3.id)
+
 puts "Seeding done!"
+puts
+
+#   1st deliverable
+puts "Review#user"
+puts rev1.user.name
+puts
+puts "Review#product"
+puts rev1.product.name
+puts
+puts "Product#reviews"
+puts product1.reviews.map(&:comment)
+puts
+puts "Product#users"
+puts product1.users.map(&:users)
+puts
+puts "User#reviews"
+puts user1.reviews.map(&:comment)
+puts
+puts "User#products"
+puts user1.products.map(&:name)
+puts
+
+puts "Review#print_review"
+puts rev1.print_review
+puts
+
+puts "Product#leave_review(user, star_rating, comment)"
+puts product3.leave_review(user2, 4, "Nice")
+puts
+
+puts "Product#print_all_reviews"
+puts product1.print_all_reviews
+puts
+
+puts "Product#average_rating"
+puts product1.average_rating
+puts
+
+puts "User#favorite_product"
+puts user1.favorite_product
+puts
+
+puts "User#remove_reviews(product)"
+puts user1.remove_reviews(product1)
+puts
