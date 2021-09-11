@@ -1,18 +1,24 @@
 class User < ActiveRecord::Base
-    has_many :products
-    has_many :reviews, through: :products
+    has_many :reviews
+    has_many :products, through: :reviews
     
     def favorite_product 
-      all_ratings = self.reviews.map(&:star_rating)
-      all_ratings.max
+
+        self.products.sort_by {|product| product.reviews.map(&:star_rating)}.last
+   
+        # self.products.sort_by { |product| product.review.map(&:star_rating)}.first
     end
 
     def remove_reviews(product)
-        self.reviews.map do |rev|
-            if rev.product_id == product.id
-                review.destroy
-            end
-        end
+        review = self.reviews.find_by_product_id(product.id)
+        review.destroy
+        # self.reviews
+        # .filter {|r| r.product.id == product.id}
+        # .each {|r| r.destroy}
     end
-
+        # self.reviews.filter do |rev|
+        #     if rev.product_id == product.id
+        #         rev.destroy
+        #     end
+        # end
 end

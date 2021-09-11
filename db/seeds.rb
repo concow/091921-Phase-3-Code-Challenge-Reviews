@@ -10,7 +10,7 @@ user2 = User.create(name: Faker::Name.name)
 user3 = User.create(name: Faker::Name.name)
 
 puts "Creating products..."
-product1 = Product.create(name: "Stapler", price: 10)
+product1 = Product.create(name: "Stapler", price: 10.00)
 product2 = Product.create(name: "Whiteboard", price: 15)
 product3 = Product.create(name: "Dry Erase Markers", price: 5)
 product4 = Product.create(name: "Ballpoint Pens", price: 2)
@@ -25,8 +25,8 @@ puts "Creating reviews..."
 # Create Reviews Here
 
 rev1 = Review.create(star_rating: 4, comment: "Great Product", product_id: product1.id, user_id: user1.id)
-rev2 = Review.create(star_rating: 1, comment: "Horrible Product", product_id: product1.id, user_id: user2.id)
-rev3 = Review.create(star_rating: 2, comment: "Decent", product_id: product1.id, user_id: user3.id)
+rev2 = Review.create(star_rating: 1, comment: "Horrible Product", product_id: product2.id, user_id: user1.id)
+rev3 = Review.create(star_rating: 2, comment: "Decent", product_id: product3.id, user_id: user1.id)
 
 puts "Seeding done!"
 puts
@@ -40,15 +40,18 @@ puts rev1.product.name
 puts
 puts "Product#reviews"
 puts product1.reviews.map(&:comment)
+puts product1.reviews.map(&:star_rating)
 puts
 puts "Product#users"
-puts product1.users.map(&:users)
+puts product1.users.map(&:name)
 puts
 puts "User#reviews"
+puts user1.reviews.map(&:star_rating)
 puts user1.reviews.map(&:comment)
 puts
 puts "User#products"
 puts user1.products.map(&:name)
+puts
 puts
 
 puts "Review#print_review"
@@ -56,8 +59,8 @@ puts rev1.print_review
 puts
 
 puts "Product#leave_review(user, star_rating, comment)"
-puts product3.leave_review(user2, 4, "Nice")
-puts
+p_leave_rev = product3.leave_review(user2, 4, "Nice")
+puts p_leave_rev.print_review
 
 puts "Product#print_all_reviews"
 puts product1.print_all_reviews
@@ -68,7 +71,7 @@ puts product1.average_rating
 puts
 
 puts "User#favorite_product"
-puts user1.favorite_product
+puts user1.favorite_product.name
 puts
 
 puts "User#remove_reviews(product)"

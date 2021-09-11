@@ -6,14 +6,17 @@ class Product < ActiveRecord::Base
         return Review.create(star_rating: star_rating, comment: comment, product_id: self.id, user_id: user.id)
     end
 
-     def print_all_reviews 
-        self.reviews.map do |review|
-            review.print_review 
-        end
+    #  def print_all_reviews 
+    #     self.reviews.map do |review|
+    #         review.print_review 
+    #     end
+    # end
+    def print_all_reviews
+        self.reviews.map(&:print_review)
     end
 
     def average_rating
-        #returns a float representing the average star rating for all reviews for this product
+        self.reviews.sum(&:star_rating).to_f/self.reviews.size
     end
 
 end
