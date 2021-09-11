@@ -10,11 +10,11 @@ class User < ActiveRecord::Base
     end
 
     def remove_reviews(product)
-        review = self.reviews.find_by_product_id(product.id)
-        review.destroy
-        # self.reviews
-        # .filter {|r| r.product.id == product.id}
-        # .each {|r| r.destroy}
+        # review = self.reviews.find_by_product_id(product.id)
+        # review.destroy
+        self.reviews
+        .filter {|r| r.product.id == product.id}
+        .each {|r| r.destroy}
     end
         # self.reviews.filter do |rev|
         #     if rev.product_id == product.id
@@ -22,3 +22,4 @@ class User < ActiveRecord::Base
         #     end
         # end
 end
+

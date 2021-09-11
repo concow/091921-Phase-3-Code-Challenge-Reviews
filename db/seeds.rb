@@ -3,6 +3,7 @@
 puts "Deleting old data..."
 Product.destroy_all
 User.destroy_all
+Review.destroy_all
 
 puts "Creating users..."
 user1 = User.create(name: Faker::Name.name)
@@ -76,4 +77,7 @@ puts
 
 puts "User#remove_reviews(product)"
 puts user1.remove_reviews(product1)
+# puts user1.remove_reviews(product2)
+# puts user1.remove_reviews(product3)
+#OPEN SQLite Explorer to see product review removed from REVIEW DB Table.
 puts
